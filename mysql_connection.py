@@ -4,10 +4,10 @@ import streamlit as st
 
 # Create MySQL connection
 conn = mysql.connector.connect(
-    host="localhost",
+    host="46.202.164.177",
     port=3306,  # No quotes, since it's an integer
-    user="root",
-    password="dada",  # Change this to your actual MySQL root password
+    user="streamlit_vps_user",
+    password="vps_streamlit",  # Change this to your actual MySQL root password
     database="my_streamlit"
 )
 
