@@ -1,6 +1,4 @@
 import mysql.connector
-# pip install mysql-connector-python
-import streamlit as st
 
 # Create MySQL connection
 conn = mysql.connector.connect(
@@ -11,17 +9,22 @@ conn = mysql.connector.connect(
     database="my_streamlit"
 )
 
-# Use a dictionary cursor to return column names
-c = conn.cursor(dictionary=True)
-
 # Function to fetch all data
 def view_all_data():
+    conn = get_db_connection()  # Open connection
+    c = conn.cursor(dictionary=True)  # Create a fresh cursor
     c.execute('SELECT * FROM customers ORDER BY id ASC')
-    data = c.fetchall()
+    data = c.fetchall()  # Fetch all results
+    c.close()  # Close cursor
+    conn.close()  # Close connection
     return data
 
-# Function to fetch department data
+# Function to fetch unique department names
 def view_all_departments():
-    c.execute('SELECT DISTINCT Department FROM customers')  # DISTINCT avoids duplicate values
-    data = c.fetchall()  # Fetch all results
-    return [row['Department'] for row in data]  # Extract only department names
+    conn = get_db_connection()
+    c = conn.cursor(dictionary=True)
+    c.execute('SELECT DISTINCT Department FROM customers')  
+    data = [row['Department'] for row in c.fetchall()]  # Extract department names
+    c.close()
+    conn.close()
+    return data
