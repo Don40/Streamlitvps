@@ -1,13 +1,14 @@
 import mysql.connector
 
-# Create MySQL connection
-conn = mysql.connector.connect(
-    host="46.202.164.177",
-    port=3306,  # No quotes, since it's an integer
-    user="streamlit_vps_user",
-    password="vps_streamlit",  # Change this to your actual MySQL root password
-    database="my_streamlit"
-)
+# Create MySQL connection function
+def get_db_connection():
+    return mysql.connector.connect(
+        host="46.202.164.177",
+        port=3306,
+        user="streamlit_vps_user",
+        password="vps_streamlit",  # Change this to your actual MySQL root password
+        database="my_streamlit"
+    )
 
 # Function to fetch all data
 def view_all_data():
